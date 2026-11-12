@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Next.js / Vite / Static Exports
+.next/
+**/.next/
+out/
+**/out/
+dist/
+**/dist/
+_site/
+
+# Local environment & logs
+.env
+.env*.local
+**/.env
+**/.env*.local
+*.tsbuildinfo
+**/*.tsbuildinfo
+*.log
+npm-debug.log*
+
+# OS / Editor
+.DS_Store
+Thumbs.db

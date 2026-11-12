@@ -1,0 +1,432 @@
+@import 'tailwindcss';
+@import '../design-system/tokens.css';
+
+@theme inline {
+  --font-sans: var(--font-inter), var(--ws-font-sans);
+  --font-serif: var(--font-fraunces), var(--ws-font-serif);
+  --font-script: var(--font-pacifico), var(--ws-font-script);
+  --font-mono: var(--font-dm-mono), var(--ws-font-mono);
+
+  --color-bg: var(--ws-bg);
+  --color-surface: var(--ws-surface);
+  --color-surface-muted: var(--ws-surface-muted);
+  --color-ink: var(--ws-ink);
+  --color-ink-secondary: var(--ws-ink-secondary);
+  --color-accent: var(--ws-accent);
+  --color-accent-hover: var(--ws-accent-hover);
+  --color-accent-text: var(--ws-accent-text);
+  --color-accent-contrast: var(--ws-accent-contrast);
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    background-color: var(--ws-bg);
+    color: var(--ws-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--ws-bg);
+    color: var(--ws-ink);
+    overflow-x: clip;
+  }
+
+  body.ws-scroll-locked {
+    overflow: hidden;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--ws-accent);
+    outline-offset: 3px;
+    border-radius: 8px;
+  }
+}
+
+/* Editorial Blueprint Map Grid */
+.ws-blueprint-grid {
+  background-color: var(--ws-bg);
+  background-image:
+    linear-gradient(var(--ws-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--ws-grid-line) 1px, transparent 1px);
+  background-size: var(--ws-grid-size) var(--ws-grid-size);
+}
+
+.ws-font-serif {
+  font-family: var(--font-serif);
+}
+
+.ws-font-script {
+  font-family: var(--font-script);
+}
+
+.ws-font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Reference-accurate Preloader Curtain & Bobbing Logo */
+@keyframes ws-ldout {
+  to {
+    transform: translateY(-101%);
+  }
+}
+
+@keyframes ws-ldbob {
+  to {
+    transform: translateY(-6px);
+  }
+}
+
+.ws-preloader {
+  animation: 1s var(--ws-ease-drawer) 1.75s forwards ws-ldout;
+}
+
+.ws-preloader-bob {
+  animation: 0.5s ease-in-out infinite alternate ws-ldbob;
+}
+
+/* Reference-accurate Hero Per-Letter Rising Mask & Staggered Fade */
+@keyframes ws-rise {
+  0% {
+    transform: translateY(110%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes ws-fade {
+  0% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.ws-letter-mask {
+  display: inline-block;
+  overflow: hidden;
+  padding: 0.08em 0.01em;
+}
+
+.ws-letter-mask > i {
+  display: inline-block;
+  font-style: normal;
+  animation: ws-rise 0.9s var(--ws-ease-out) var(--d, 0ms) both;
+}
+
+.ws-hero-slogan {
+  animation: 0.9s 0.5s both ws-fade;
+}
+
+.ws-hero-desc {
+  animation: 0.9s 0.65s both ws-fade;
+}
+
+.ws-hero-actions {
+  animation: 0.9s 0.8s both ws-fade;
+}
+
+/* Hero Vehicle Wheel Rotation driven by CSS var --wa */
+.ws-wheel {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  transform: rotate(var(--wa, 0deg));
+}
+
+/* Hero Vehicle Wrapper matching reference `.ttw` */
+.ws-ttw {
+  position: absolute;
+  bottom: calc(20% - 30px);
+  left: 64%;
+  width: clamp(240px, 38vw, 490px);
+  transform: translate(-50%);
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+@media (max-width: 760px) {
+  .ws-ttw {
+    bottom: calc(20% - 20px);
+    left: 50%;
+  }
+}
+
+/* Blueprint Canvas padding at reference 760px / 761px+ breakpoints */
+.ws-map {
+  padding: 90px 0 130px;
+}
+
+@media (max-width: 760px) {
+  .ws-map {
+    padding: 70px 0 90px;
+  }
+}
+
+/* Scroll-triggered Scenery Props along Bezier Route */
+.ws-scenery-prop {
+  position: absolute;
+  opacity: 0;
+  transform: scale(0.3);
+  transition: opacity 0.5s, transform 0.6s var(--ws-ease-pop);
+}
+
+.ws-scenery-prop.on {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Pin Pop Spring */
+@keyframes ws-pin-pop {
+  0% {
+    transform: scale(0.8);
+  }
+  60% {
+    transform: scale(1.4);
+  }
+  to {
+    transform: scale(1.18);
+  }
+}
+
+.ws-pin {
+  position: absolute;
+  top: 44px;
+  margin-top: -18px;
+}
+
+.ws-pin[data-pin-pos='edge-right'] {
+  right: -20px;
+  left: auto;
+}
+
+.ws-pin[data-pin-pos='edge-left'] {
+  left: -20px;
+  right: auto;
+}
+
+.ws-pin[data-pin-pos='top-center'] {
+  left: 50%;
+  top: 0;
+  right: auto;
+  margin-left: -18px;
+}
+
+.ws-pin-pop {
+  animation: 0.6s var(--ws-ease-pop) ws-pin-pop;
+  transform: scale(1.18);
+}
+
+/* Reference-Accurate Blueprint Map Canvas & Alternating Stop Grid */
+.ws-map-in {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 90px;
+  margin: 0;
+  padding: 0 clamp(16px, 8.5vw, 128px);
+}
+
+.ws-stp {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(110px, 12vw, 190px) minmax(0, 1fr);
+  align-items: stretch;
+}
+
+.ws-stp-l > .ws-stp-card {
+  grid-area: 1 / 1;
+}
+
+.ws-stp-l > .ws-stp-tile {
+  grid-area: 1 / 3;
+}
+
+.ws-stp-r > .ws-stp-tile {
+  grid-area: 1 / 1;
+}
+
+.ws-stp-r > .ws-stp-card {
+  grid-area: 1 / 3;
+}
+
+.ws-stp-center {
+  width: 100%;
+  max-width: 980px;
+  margin-inline: auto;
+}
+
+.ws-stp-bk {
+  grid-template-columns: minmax(0, 190px) minmax(0, 760px) minmax(0, 190px);
+  justify-content: center;
+  column-gap: 20px;
+}
+
+.ws-stp-bk > .ws-bk-left {
+  grid-area: 1 / 1;
+}
+
+.ws-stp-bk > .ws-stp-card {
+  grid-area: 1 / 2;
+}
+
+.ws-stp-bk > .ws-bk-right {
+  grid-area: 1 / 3;
+}
+
+@media (max-width: 1099px) {
+  .ws-stp-bk {
+    grid-template-columns: minmax(0, 760px);
+  }
+  .ws-stp-bk > .ws-stp-card {
+    grid-column: 1;
+  }
+  .ws-stp-bk > .ws-stop-tile {
+    display: none;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1023px) {
+  .ws-map-in {
+    padding: 0 clamp(16px, 4vw, 44px);
+  }
+  .ws-stp {
+    grid-template-columns: minmax(0, 1fr) clamp(84px, 10vw, 120px) minmax(0, 1fr);
+  }
+}
+
+/* Card & Tile Activation Transitions */
+.ws-stop-card {
+  opacity: 0.84;
+  transition:
+    opacity 0.5s,
+    transform 0.6s var(--ws-ease-out),
+    box-shadow 0.5s,
+    border-color 0.5s;
+}
+
+.ws-stop-card[data-side='left'] {
+  transform: translateX(-16px);
+}
+
+.ws-stop-card[data-side='right'] {
+  transform: translateX(16px);
+}
+
+.ws-stop-card.lit {
+  opacity: 1;
+  border-color: var(--ws-accent);
+  transform: translateY(-6px) translateX(0);
+  box-shadow: var(--ws-shadow-card-lit);
+}
+
+@media (max-width: 760px) {
+  .ws-map-in {
+    gap: 44px;
+    padding: 0 18px 0 62px;
+  }
+  .ws-stp,
+  .ws-stp-wide-r,
+  .ws-stp-bk,
+  .ws-stp-contact {
+    display: block;
+  }
+  .ws-stop-tile,
+  .ws-stp-bk > .ws-stop-tile {
+    display: none;
+  }
+  .ws-pin[data-pin-pos='edge-right'],
+  .ws-pin[data-pin-pos='edge-left'],
+  .ws-pin[data-pin-pos='top-center'] {
+    top: 36px;
+    left: -41px;
+    right: auto;
+    margin-left: 0;
+  }
+  .ws-stop-card[data-side='left'],
+  .ws-stop-card[data-side='right'] {
+    transform: none;
+  }
+  .ws-stop-card.lit {
+    transform: translateY(-4px);
+  }
+}
+
+.ws-stop-tile {
+  opacity: 0.62;
+  transform: scale(0.96);
+  transition:
+    opacity 0.6s,
+    transform 0.7s var(--ws-ease-out),
+    border-color 0.5s;
+}
+
+.ws-stop-tile.lit {
+  opacity: 1;
+  transform: none;
+}
+
+/* Gentle SVG float & ripple keyframe accents */
+@keyframes ws-float {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes ws-ripple {
+  0% {
+    opacity: 0.85;
+    transform: scale(0.55);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.45);
+  }
+}
+
+.ws-float {
+  animation: ws-float 4.8s ease-in-out infinite alternate;
+}
+
+.ws-ripple {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ws-ripple 2.5s ease-out infinite;
+}
+
+.ws-ripple-delay {
+  animation-delay: 1.25s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .ws-float,
+  .ws-ripple,
+  .ws-preloader,
+  .ws-preloader-bob,
+  .ws-letter-mask > i,
+  .ws-hero-slogan,
+  .ws-hero-desc,
+  .ws-hero-actions {
+    animation: none !important;
+  }
+  .ws-stop-tile .scene {
+    transform: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

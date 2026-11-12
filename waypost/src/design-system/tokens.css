@@ -1,0 +1,134 @@
+/* ==========================================================================
+ * Waystop Design System — Core CSS Custom Properties & Motion Tokens
+ * Inspired by Tuktuk's warm editorial wayfinding aesthetic.
+ * All color variables are dynamically overridable via ThemeProvider presets.
+ * ========================================================================== */
+
+:root {
+  /* Typography Families */
+  --ws-font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --ws-font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --ws-font-script: 'Pacifico', 'Fraunces', cursive;
+  --ws-font-mono: 'DM Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Light Palette Defaults (Waypost Warm) */
+  --ws-bg: #fbf3e4;
+  --ws-surface: #fffdf8;
+  --ws-surface-muted: #f5ead6;
+  --ws-ink: #1c1410;
+  --ws-ink-secondary: #4a2f22;
+  --ws-accent: #b3202e;
+  --ws-accent-hover: #8f1824;
+  --ws-accent-text: #b3202e;
+  --ws-accent-contrast: #fbf3e4;
+  --ws-accent-ring: rgba(179, 32, 46, 0.22);
+
+  --ws-positive: #3f6f2e;
+  --ws-positive-bg: #e8f3df;
+  --ws-warning: #c87a19;
+  --ws-warning-bg: #fdf1da;
+  --ws-danger: #b3202e;
+  --ws-danger-bg: #fce8ea;
+
+  --ws-map-park: #a9c98f;
+  --ws-map-park-border: #8db274;
+  --ws-map-water: #a9d0e2;
+  --ws-map-water-border: #86b7cf;
+
+  --ws-sky-top: #f2c49c;
+  --ws-sky-bottom: #fff1dc;
+  --ws-sun: #fff3c9;
+  --ws-horizon-hill: #8fb27a;
+  --ws-horizon-far: #d3bba0;
+  --ws-horizon-mid: #b39878;
+  --ws-horizon-near: #7a5640;
+  --ws-road: #3b2a22;
+  --ws-road-border: #2a1a12;
+  --ws-hero-scrim: #fbf3e4;
+
+  --ws-header-bg: rgba(251, 243, 228, 0.95);
+  --ws-hover-tint: rgba(74, 47, 34, 0.08);
+  --ws-grid-line: rgba(74, 47, 34, 0.08);
+  --ws-border-dashed: rgba(74, 47, 34, 0.34);
+  --ws-border-subtle: rgba(74, 47, 34, 0.16);
+  --ws-footer-bg: #2a1a12;
+  --ws-footer-ink: #fbf3e4;
+  --ws-footer-accent: #f6b8bd;
+
+  /* Spacing & Container Scale */
+  --ws-container-max: 80rem; /* 1280px */
+  --ws-container-reading: 47.5rem; /* 760px */
+  --ws-grid-size: 56px;
+
+  /* Radii */
+  --ws-radius-canvas: 44px;
+  --ws-radius-card: 30px;
+  --ws-radius-pill: 28px;
+  --ws-radius-input: 22px;
+  --ws-radius-inner: 20px;
+  --ws-radius-full: 9999px;
+
+  /* Shadows */
+  --ws-shadow-card: 0 14px 30px -24px rgba(28, 20, 16, 0.85);
+  --ws-shadow-card-lit: 0 0 0 4px var(--ws-accent-ring), 0 26px 40px -26px rgba(28, 20, 16, 0.9);
+  --ws-shadow-btn: 0 8px 20px -10px var(--ws-accent);
+  --ws-shadow-canvas: 0 -20px 40px -20px rgba(28, 20, 16, 0.25);
+
+  /* Motion */
+  --ws-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ws-ease-pop: cubic-bezier(0.3, 1.8, 0.5, 1);
+  --ws-ease-drawer: cubic-bezier(0.76, 0, 0.24, 1);
+  --ws-dur-fast: 180ms;
+  --ws-dur-base: 350ms;
+  --ws-dur-slow: 650ms;
+}
+
+.dark {
+  --ws-bg: #17110e;
+  --ws-surface: #241a15;
+  --ws-surface-muted: #2e211b;
+  --ws-ink: #f6ecdc;
+  --ws-ink-secondary: #e8d3bb;
+  --ws-accent: #c42a3a;
+  --ws-accent-hover: #a21f2d;
+  --ws-accent-text: #ff7b86;
+  --ws-accent-contrast: #fbf3e4;
+  --ws-accent-ring: rgba(255, 123, 134, 0.28);
+
+  --ws-positive: #9bd47f;
+  --ws-positive-bg: rgba(155, 212, 127, 0.14);
+  --ws-warning: #f4b254;
+  --ws-warning-bg: rgba(244, 178, 84, 0.14);
+  --ws-danger: #ff7b86;
+  --ws-danger-bg: rgba(255, 123, 134, 0.14);
+
+  --ws-map-park: #2e4a2a;
+  --ws-map-park-border: #44683c;
+  --ws-map-water: #27475a;
+  --ws-map-water-border: #3b6a82;
+
+  --ws-sky-top: #321d1a;
+  --ws-sky-bottom: #533025;
+  --ws-sun: #ffca8a;
+  --ws-horizon-hill: #3f5838;
+  --ws-horizon-far: #4e3b31;
+  --ws-horizon-mid: #3a2b24;
+  --ws-horizon-near: #281d18;
+  --ws-road: #16100d;
+  --ws-road-border: #0d0907;
+  --ws-hero-scrim: #17110e;
+
+  --ws-header-bg: rgba(23, 17, 14, 0.94);
+  --ws-hover-tint: rgba(246, 236, 220, 0.12);
+  --ws-grid-line: rgba(246, 236, 220, 0.08);
+  --ws-border-dashed: rgba(246, 236, 220, 0.34);
+  --ws-border-subtle: rgba(246, 236, 220, 0.18);
+  --ws-footer-bg: #120c09;
+  --ws-footer-ink: #f6ecdc;
+  --ws-footer-accent: #ff7b86;
+
+  --ws-shadow-card: 0 14px 30px -24px #000000;
+  --ws-shadow-card-lit: 0 0 0 4px var(--ws-accent-ring), 0 26px 40px -26px #000000;
+  --ws-shadow-canvas: 0 -20px 40px -20px #000000;
+}
+
